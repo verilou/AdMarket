@@ -1,0 +1,8 @@
+<h1>Profile</h1>
+<ul>
+    <li>{{user_email}}</li>
+    <li>{{user_id}}</li>
+    {% for role in user_roles %}
+     <li> {{role}} </li>
+    {% endfor %}
+</ul>

@@ -4,13 +4,19 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertiserRepository")
+ * @UniqueEntity("email")
  */
 class Advertiser implements UserInterface
 {
     /**
+     * 
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -19,6 +25,7 @@ class Advertiser implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -32,11 +39,6 @@ class Advertiser implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Company;
 
     public function getId(): ?int
     {
@@ -114,17 +116,5 @@ class Advertiser implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getCompany(): ?string
-    {
-        return $this->Company;
-    }
-
-    public function setCompany(?string $Company): self
-    {
-        $this->Company = $Company;
-
-        return $this;
     }
 }
