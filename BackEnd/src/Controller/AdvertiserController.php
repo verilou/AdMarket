@@ -31,33 +31,36 @@ class AdvertiserController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        // 0.5) Convert JSON data
+        $data = json_decode($request->getContent(), true);
+        
         // 1) build the form
         $user = new Advertiser();
         $form = $this->createForm(AdvertiserType::class, $user);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
-
-            // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('app_login');
+        if (!empty($data)) {
+            # code...
+            $form->submit($data);
+            if($form->isValid()){
+                // 3) Encode the password (you could also do this via Doctrine listener)
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                
+                // 4) save the User!
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                
+                // ... do any other work - like sending them an email, etc
+                // maybe set a "flash" success message for the user
+                
+                return new Response('It worked. Believe me - I\'m an API', 201);  
+            }
+            foreach($form->getErrors(true, false) as $er) {
+                dump($er);
+            }
         }
+        return new Response('wrong2', 401);  
 
-        return $this->render(
-            'security/register.html.twig',
-            array('form' => $form->createView())
-        );
     }
 
     /**
