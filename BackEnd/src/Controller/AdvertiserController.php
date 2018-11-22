@@ -13,21 +13,31 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdvertiserController extends AbstractController
 {
+    // /**
+    //  * @Route("/login", name="app_login")
+    //  */
+    // public function login(AuthenticationUtils $authenticationUtils): Response
+    // {
+    //     // get the login error if there is one
+    //     $error = $authenticationUtils->getLastAuthenticationError();
+    //     // last username entered by the user
+    //     $lastUsername = $authenticationUtils->getLastUsername();
+
+    //     return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    // }
+    
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/register", methods="GET")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+    public function registerRender(Request $request){
+        var_dump(    $form->generateCsrfToken   );
+        $response = new Response(200);
+        $response->headers->set("token", $csrf->getValue());
+        return $response; 
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register", name="test", methods="POST")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -40,24 +50,19 @@ class AdvertiserController extends AbstractController
         if (!empty($data)) {
             # code...
             $form->submit($data);
-            if($form->isValid()){
-                // 3) Encode the password (you could also do this via Doctrine listener)
-                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-                $user->setPassword($password);
-                
-                // 4) save the User!
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                
-                // ... do any other work - like sending them an email, etc
-                // maybe set a "flash" success message for the user
-                
-                return new Response('It worked. Believe me - I\'m an API', 201);  
-            }
-            foreach($form->getErrors(true, false) as $er) {
-                dump($er);
-            }
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+            
+            return new Response('It worked. Believe me - I\'m an API', 201);  
         }
         return new Response('wrong2', 401);  
 
