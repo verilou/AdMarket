@@ -48,6 +48,55 @@ class UserController extends Controller
         
         return response()->json(compact('user','token'),201);
     }
+
+    public function Modify(Request $request) 
+    {
+        try {
+            
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+            
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            
+            return response()->json(['token_expired'], $e->getStatusCode());
+            
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            
+            return response()->json(['token_invalid'], $e->getStatusCode());
+            
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            
+            return response()->json(['token_absent'], $e->getStatusCode());
+            
+        }
+        $updateUser = $request->all();
+        $alterable = [
+            "email" => $user->email,
+            "name" => $user->name
+        ];
+        foreach ($alterable as $key => $value) {
+            if (empty($updateUser[$key])) {
+                $updateUser[$key] = $alterable[$key];
+            }
+        }
+        
+        $validator = Validator::make($updateUser, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        foreach ($updateUser as $key => $value) {
+            $user->{$key} = $value;
+        }
+
+        $user->save();
+
+        return response()->json(compact('user'), 201);
+    }
             
     public function getAuthenticatedUser()
     {
