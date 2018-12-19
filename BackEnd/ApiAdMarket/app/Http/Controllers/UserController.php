@@ -70,11 +70,14 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
             
         }
-        $updateUser = $request->all();
+
+        $updateUser = ["email" => $request->input('email'), "name" => $request->input('name')];
+        
         $alterable = [
             "email" => $user->email,
             "name" => $user->name
         ];
+
         foreach ($alterable as $key => $value) {
             if (empty($updateUser[$key])) {
                 $updateUser[$key] = $alterable[$key];
