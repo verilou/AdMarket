@@ -1,8 +1,15 @@
 # AdMarket
 A market for Youtuber and Ads
 
-##Route
+## Route
+
+`http://localhost:8000/api`
 
 ```
-http://localhost:8000/api/login
+/login  [POST]
+
+{
+  "password":  "admarket",
+  "email": "louis1998@live.fr"
+}
 ```
