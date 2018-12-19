@@ -49,3 +49,31 @@ A market for Youtuber and Ads
       }
   }
   ```
+  #### /register [POST]
+
+  Register a new user
+
+  ##### Body
+
+  ```
+  {
+    "email": "exemple@test.fr",
+    "name": "Louis Castel",
+    "password": "secrect",
+    "password_confirmation": "secret"
+  }
+  ```
+
+  ##### Response
+  ```
+{
+    "user": {
+        "name": "Louis Castel",
+        "email": "exemple@test.fr",
+        "updated_at": "2018-12-19 16:06:10",
+        "created_at": "2018-12-19 16:06:10",
+        "id": 2
+    },
+    "token": "secret"
+}
+  ```
