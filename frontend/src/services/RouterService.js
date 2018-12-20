@@ -4,6 +4,8 @@ import Home from '../components/Home';
 import Annonceur from '../components/Annonceur';
 import Influenceur from '../components/Influenceur';
 import Header from '../components/Header';
+import AuthYoutube from '../components/AuthYoutube';
+import CheckAuthYoutube from '../components/CheckAuthYoutube';
 import urlImages from '../assets/images/fond2.jpg';
 import fondInf from '../assets/images/fondInf.png';
 import fondAnn from '../assets/images/fondAnnonce.png';
@@ -15,8 +17,9 @@ function RouterApp() {
       <div className="content-app d-flex justify-content-center">
         <div className="col-12 pr-0 pl-0">
           <Route exact path="/" component={HomePage} />
-          <Route path="/influenceur" component={InfluenceurPage} />
+          <Route path="/influenceur" component={AuthYoutube} />
           <Route path="/annonceur" component={AnnonceurPage} />
+          <Route path="/checkYtToken" component={CheckAuthYoutube} />
         </div>
       </div>
     </Router>
