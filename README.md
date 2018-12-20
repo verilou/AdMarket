@@ -77,3 +77,36 @@ A market for Youtuber and Ads
     "token": "secret"
 }
   ```
+  #### /update [POST]
+
+  Register a new user
+
+  ##### Header
+
+  ```
+  {
+    "Authorization": "bearer secret"
+  }
+  ```
+
+  ##### Body
+
+  ```
+  {
+    "email": "exemple2@test.fr", //optional
+    "name": "Louis Castel", //optional
+  }
+  ```
+
+  ##### Response
+  ```
+{
+    "user": {
+        "name": "Louis Castel",
+        "email": "exemple2@test.fr",
+        "updated_at": "2018-12-19 16:06:10",
+        "created_at": "2018-12-19 16:06:10",
+        "id": 2
+    }
+}
+  ```
