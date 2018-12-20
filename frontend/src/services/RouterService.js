@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from '../components/Home';
 import Annonceur from '../components/Annonceur';
 import Influenceur from '../components/Influenceur';
+import Register from '../components/Register';
+import Login from '../components/Login';
 import Header from '../components/Header';
 import AuthYoutube from '../components/AuthYoutube';
 import CheckAuthYoutube from '../components/CheckAuthYoutube';
 import urlImages from '../assets/images/fond2.jpg';
-import fondInf from '../assets/images/fondInf.png';
+import fondInf from '../assets/images/fondInfluence.png';
 import fondAnn from '../assets/images/fondAnnonce.png';
 
 
@@ -20,6 +22,8 @@ function RouterApp() {
           <Route path="/influenceur" component={AuthYoutube} />
           <Route path="/annonceur" component={AnnonceurPage} />
           <Route path="/checkYtToken" component={CheckAuthYoutube} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" component={LoginPage} />
         </div>
       </div>
     </Router>
@@ -48,6 +52,22 @@ function AnnonceurPage() {
     <div className='container  col-12 pr-0 pl-0' style={style.backgroundAnn}>
     <Header colorBackNav='black' activeAnnonceur='active'/>
       <Annonceur/>
+    </div>
+    );
+  }
+function RegisterPage() {
+  return (
+    <div className='container  col-12 pr-0 pl-0' style={style.backgroundInf}>
+    <Header colorBackNav='black' activeInfluenceur='active'/>
+      <Register/>
+    </div>
+  );
+}
+function LoginPage() {
+    return (
+    <div className='container  col-12 pr-0 pl-0' style={style.backgroundAnn}>
+    <Header colorBackNav='black' activeAnnonceur='active'/>
+      <Login/>
     </div>
     );
   }
