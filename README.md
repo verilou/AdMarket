@@ -79,7 +79,7 @@ A market for Youtuber and Ads
   ```
   #### /update [POST]
 
-  Register a new user
+  Update user datas
 
   ##### Header
 
