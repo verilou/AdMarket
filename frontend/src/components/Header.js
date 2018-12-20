@@ -28,6 +28,12 @@ class Header extends Component {
                 <li className="nav-item">
                 <Link className={`nav-link font-weight-bold ${this.props.activeAnnonceur} ml-4 mr-0`} style={ url[3] == 'Annonceur' ? style.linkAnnonceur : style.linkAlt } id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" to="/Annonceur">ANNONCEUR</Link>
                 </li>
+                <li className="nav-item">
+                <Link className={`nav-link font-weight-bold mr-4 ml-4`} id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" to="/Register">REGISTER</Link>
+                </li>
+                <li className="nav-item">
+                <Link className={`nav-link font-weight-bold ml-4 mr-0`} id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" to="/Login">LOGIN</Link>
+                </li>
             </ul>
             </div>
             </div>
