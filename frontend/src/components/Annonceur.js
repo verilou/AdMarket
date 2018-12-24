@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
+import CommunicationManager from '../services/CommunicationManager';
+import Config from '../services/Config';
+import Annonce from './Annonce';
+
 
 
 class Annonceur extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      annonces: []
+    }
+  }
+  
+  componentDidMount(){
+    CommunicationManager.getAnnonces(Config.API_URL_DEV)
+    this.setState({annonces: this.props.annonce})
+  }
+  
+  
   render() {
     return (
       <div>
@@ -11,24 +29,12 @@ class Annonceur extends Component {
           </div>
           <div className="col-5 d-inline-block" style={style.blockInfluence}>
             <p style={{fontWeight:'bold'}}>Annonceur</p>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
-            <div style={style.blockDetailInfluence}>
-
-            </div>
+              {/* {  this.state.annonces.map(annonce =>
+              <div style={style.blockDetailInfluence}>
+                <a href="">Serie: {annonce.name}</a>
+              </div>)}  */}
+              <Annonce />
+               
           </div>
         </div>
       </div>

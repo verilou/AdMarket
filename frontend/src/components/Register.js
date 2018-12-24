@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CommunicationManager from '../services/CommunicationManager';
 import Config from '../services/Config'
-import axios from 'axios';
 
 
 
@@ -51,18 +50,16 @@ class Register extends Component {
 
     onRegisterButtonClicked()
     {
-        alert(this.state.password_confirmation)
-        if (this.state.email == null || this.state.email.length == 0) {
-            if (this.state.password == null || this.state.password.length == 0) {
+        if (this.state.email === null || this.state.email.length === 0) {
+            if (this.state.password === null || this.state.password.length === 0) {
                 alert("E-mail et mot de passe manquants");
             } else {
                 alert("E-mail manquant");
             }
         }
-        else if (this.state.password == null || this.state.password.length == 0) {
+        else if (this.state.password === null || this.state.password.length === 0) {
             alert("Mot de passe manquant");
         } else {
-
             let reportRegister = {
                 email: this.state.email,
                 name: this.state.name,
@@ -71,11 +68,8 @@ class Register extends Component {
             }
                 alert(JSON.stringify(reportRegister))
                 CommunicationManager.register(Config.API_URL_DEV + CommunicationManager.ROUTE_REGISTER, reportRegister)
-            }
-
-        
-            
-        }
+            } 
+    }
         
     onNameChanged(event) 
     {

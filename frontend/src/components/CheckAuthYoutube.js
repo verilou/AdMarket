@@ -45,11 +45,11 @@ class CheckAuthYoutube extends Component
         var response = xhr;
         // When request is finished, verify that the 'aud' property in the
         // response matches YOUR_CLIENT_ID.
-        if (response['aud'] && response['aud'] == this.state.CLIENT_ID) {
+        if (response['aud'] && response['aud'] === this.state.CLIENT_ID) {
             params['scope'] = response['scope'];
             localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
-            console.log(params.state == "socool");
-            if (params['state'] == 'socool') {
+            console.log(params.state === "socool");
+            if (params['state'] === 'socool') {
                 this.trySampleRequest();
             }
         } else if (xhr.readyState === 4) {
